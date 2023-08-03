@@ -5,7 +5,7 @@ Before=roscore.service
  
 [Service]
 User=jetson
-ExecStart=/usr/bin/screen -S roscore -ADm bash -l -c 'socat -d -d pty,raw,echo=0 pty,raw,echo=0'
+ExecStart=/usr/bin/screen -S socat -ADm bash -l -c 'socat -d -d pty,raw,echo=0 pty,raw,echo=0'
 Type=simple
 Restart=always
 RestartSec=3s
