@@ -1,6 +1,6 @@
 [Unit]
 Description=socat launcher
-# After=networking.service
+Before=roscore.service
 # Requires=networking.service
  
 [Service]
