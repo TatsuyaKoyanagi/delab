@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+}
+
+.body{
+    position: relative;
+}
+
+.line{
+    position: absolute;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: crimson ;
+    height: 2px;
+    width: auto;
+}

@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+
+
+
+/*========= レイアウトのためのCSS ===============*/
+
+
+
+
+.header .ui{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container{
+    margin-top: 30px;
+}
+
+
+.axes{
+    background:#fff;
+    padding:300px 0;
+    text-align: center;
+}
+
+.buttons .axes {
+    padding: 1em;
+}
+    
+.axis {
+    min-width: 400px;
+    margin: 1em;
+}
+    
+.button {
+    padding: 1em;
+    border: 2px solid black;
+    background-color: rgb(255, 255, 128);
+}
+    
+.pressed {
+    border: 2px solid black;
+    background-color: red;
+}
+
+.video video{
+    width: 100%;
+    height: 100%;
+}
+
+.message{
+    margin-top: 10%;
+}
+
+.message p{
+    font-size: 36px;
+    color: red;
+}
