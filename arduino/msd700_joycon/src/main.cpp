@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-const int INPUT_PINS[] = { A0, A1, A2, A3 };
+const int INPUT_PINS[] = { A0, A1, A2, A3, A4, A5 };
 const int NUM_PINS = sizeof(INPUT_PINS) / sizeof(INPUT_PINS[0]);
 const int MID = 512;
 int INPUT_RES[NUM_PINS];
@@ -33,7 +33,7 @@ void loop() {
   Serial.print(0);
   Serial.print(",");
   Serial.print(1000);
-  Serial.print(",");
+  Serial.print(":");
   }
 }
 
@@ -55,11 +55,11 @@ void serialEvent() {  // シリアルイベント関数
     }
     //一時停止
     if (receivedChar == 'c' || receivedChar == 'C') {
-      flag = 1;
-    }
-    //一時停止解除
-    if (receivedChar == 's' || receivedChar == 'S') {
-      flag = 0;
+      if(flag==1){
+        flag=0;
+      }else{
+        flag = 1;
+      }
     }
   }
 }
@@ -67,7 +67,7 @@ void serialEvent() {  // シリアルイベント関数
 void read_resister() {
   for (int i = 0; i < NUM_PINS; i++) {
     INPUT_RES[i] = analogRead(INPUT_PINS[i]) + OFFSET_RES[i];
-    //INPUT_RES[i] = map(INPUT_RES[i], OFFSET_RES[i], 1023 + OFFSET_RES[i], 0, 1023);
+    //cINPUT_RES[i] = map(INPUT_RES[i], OFFSET_RES[i], 1023 + OFFSET_RES[i], 0, 1023);
   }
 }
 

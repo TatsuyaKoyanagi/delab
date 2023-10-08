@@ -74,7 +74,7 @@ void setup() {
   }
 
   Serial.println("-- Default Test --");
-  delayTime = 500;
+  delayTime = 1000;
 
   Serial.println();
 }
@@ -120,22 +120,22 @@ void print_at_display() {
       case 4:
         P.setFont(fontArabic);
         //P.setFont(fontArabic);
-        P.displayText(temp.c_str(), PA_LEFT, 50, 1000, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
-        delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
+        P.displayText(temp.c_str(), PA_LEFT, 10, 100, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
+        //delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
         currentState = 5;
         break;
 
       case 5:
         P.setFont(fontArabic);
-        P.displayText(pres.c_str(), PA_LEFT, 50, 1000, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
-        delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
+        P.displayText(pres.c_str(), PA_LEFT, 10, 100, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
+        //delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
         currentState = 6;
         break;
 
       case 6:
 
-        P.displayText(humi.c_str(), PA_LEFT, 50, 1000, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
-        delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
+        P.displayText(humi.c_str(), PA_LEFT, 10, 100, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
+        //delay(100);  // 1秒待つ (あるいは他の適切な待ち時間)
         currentState = 4;
         break;
     }
@@ -144,11 +144,11 @@ void print_at_display() {
 
 void setting_value() {
   temp = String(bme.readTemperature(), 1);
-  temp += "°C";  // 1桁の小数点で表示
+  temp += " °C";  // 1桁の小数点で表示
   pres = String(bme.readPressure() / 100.0F, 1);
-  pres += "hPa";  // hPaに変換して、1桁の小数点で表示
+  pres += " hPa";  // hPaに変換して、1桁の小数点で表示
   humi = String(bme.readHumidity(), 1);
-  humi += "%";  // 1桁の小数点で表示
+  humi += " %";  // 1桁の小数点で表示
 }
 
 
