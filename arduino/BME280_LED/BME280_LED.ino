@@ -38,6 +38,7 @@
 #define DATA_PIN 50  // or MOSI
 #define CS_PIN 53    // or SS
 
+
 void setting_value();
 void print_at_display();
 
