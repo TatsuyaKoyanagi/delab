@@ -1,12 +1,15 @@
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 #define ES_BUTTON 2  //緊急停止ボタン
 #define ES_LED 7     //ボタンLED
 
 volatile bool Stop = false;  // 割り込みからアクセスされる変数はvolatileとして宣言
 
-const int INPUT_PINS[] = { A0, A1, A3, A4 };  //ly,lx,ry,rx,lz,rz
+const int INPUT_PINS[] = { A0, A1, A2, A3 };  //ly,lx,ry,rx,lz,rz
+String axis[]={"ly","lx","ry","rx"};
 const int NUM_PINS = sizeof(INPUT_PINS) / sizeof(INPUT_PINS[0]);
+
 
 const int MAX = 1.00;  //1023
 const int MID = 512;
@@ -17,6 +20,8 @@ int OFFSET_RES[NUM_PINS];
 
 
 volatile int flag = 0;
+volatile int ES_value = 0;
+
 
 void set_offset();
 void serialEvent();
@@ -37,22 +42,12 @@ void setup() {
 }
 
 void loop() {
-  if (!Stop) {
-    if (flag == 1) {
-      pause();
-    } else {
-      read_resister();
-      print_resister();
-      //send_resister();
-      Serial.print(0);
-      Serial.print(",");
-      Serial.print(1000);
-      Serial.print(":");
-    }
+  if (flag == 1) {
+    pause();
   } else {
-    exit;
-    while (1) {
-    }
+    read_resister();
+    //send_resister();
+    send_json();
   }
 }
 
@@ -67,9 +62,11 @@ void set_offset() {
 
 void toggleLED() {
   if (digitalRead(ES_BUTTON) == LOW) {  // ボタンが押された場合
-    digitalWrite(ES_LED, LOW);  // LEDを点灯
-  } else {  // ボタンが放された場合
+    digitalWrite(ES_LED, LOW);          // LEDを点灯
+    ES_value = 0;
+  } else {                       // ボタンが放された場合
     digitalWrite(ES_LED, HIGH);  // LEDを消灯
+    ES_value = 1;
   }
 }
 
@@ -104,25 +101,28 @@ void read_resister() {
   }
 }
 
-void print_resister() {
-  for (int i = 0; i < NUM_PINS; i++) {
-    Serial.print(INPUT_RES[i]);
-    if (i != NUM_PINS - 1) {
-      Serial.print(",");
-    }
-  }
-  Serial.println();
-}
-
 void send_resister() {
   String resStr = "";
   for (int i = 0; i < NUM_PINS; i++) {
     resStr += String(INPUT_RES[i]);
-    if (i != NUM_PINS - 1) {
-      resStr += ",";
-    }
+    resStr += ",";
   }
+  resStr += String(ES_value);
   Serial.println(resStr);
+}
+
+void send_json() {
+  StaticJsonDocument<200> doc;  // JSONドキュメントを作成。必要なサイズを指定。
+  // JSONデータを追加
+  for (int i = 0; i < NUM_PINS; i++) {
+    String pinName = axis[i];
+    float truncatedValue = static_cast<int>(INPUT_RES[i] * 100) * 0.01f;
+    doc[pinName] = truncatedValue;
+  }
+  doc["button"] = ES_value;
+  // JSONデータをシリアル通信で送信
+  serializeJson(doc, Serial);
+  Serial.println();  // 改行を追加
 }
 
 void pause() {
