@@ -1,0 +1,28 @@
+{
+    "name": "pxt-monosugo2023_workshop",
+    "version": "1.1.1",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "pxt-kitronik-robotics-board": "github:kitronikltd/pxt-kitronik-robotics-board#v0.1.0"
+    },
+    "files": [
+        "README.md",
+        "backhoe.ts",
+        "cylinder-driver.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "targetVersions": {
+        "target": "6.0.17",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}

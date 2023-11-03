@@ -7,13 +7,8 @@
 volatile bool Stop = false;  // 割り込みからアクセスされる変数はvolatileとして宣言
 
 const int INPUT_PINS[] = { A0, A1, A2, A3 };  //ly,lx,ry,rx,lz,rz
-String axis[]={"ly","lx","ry","rx"};
+String axis[]={"[joyLeft_y]","[joyLeft_x]","[joyRight_y]","[joyRight_x]"};
 const int NUM_PINS = sizeof(INPUT_PINS) / sizeof(INPUT_PINS[0]);
-
-
-const int MAX = 1.00;  //1023
-const int MID = 512;
-const int MIN = -1.00;  //0
 
 float INPUT_RES[NUM_PINS];
 int OFFSET_RES[NUM_PINS];
