@@ -1,8 +1,8 @@
 /**
- * ものすごフェスタ2023用
+ * リケフェス2023用
  * micro:bitでMSD700のバックホウアタッチメントを制御します
  */
-//% weight=200 color=#ff8c00 icon="\uf085" block="ものスゴフェスタ2023"
+//% weight=200 color=#ff8c00 icon="\uf085" block="リケフェス2023"
 //% groups=["ブーム", "アーム", "バケット", "特殊", "others"]
 namespace Monosugo2023_Workshop_Backhoe {
 
