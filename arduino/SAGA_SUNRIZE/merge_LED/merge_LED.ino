@@ -1,18 +1,15 @@
 #include <Adafruit_NeoPixel.h>
-#define PIN 6           // NeoPixelデータピン
-#define NUMPIXELS_1 25  // 1-25の数
-#define NUMPIXELS_2 5   // 26-30NeoPixelの数
-#define NUMPIXELS_2 30  // 31-60NeoPixelの数
+#define PIN 6             // NeoPixelデータピン
+#define NUMPIXELS_ALL 60  // LEDの総数
 
-Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(NUMPIXELS_1, PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(NUMPIXELS_2, PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(NUMPIXELS_3, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS_ALL, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
   strip.begin();
   strip.show();  // NeoPixelを初期化して消灯状態にする
 }
 void loop() {
+  strip.clear();
   // 各LED番号によって異なるプログラムを同時に実行
   prog_1to25();   // LED番号1から25までのプログラム
   prog_26to35();  // LED番号26から35までのプログラム
@@ -24,15 +21,18 @@ void loop() {
 // LED番号1から25までのプログラム
 void prog_1to25() {
   theaterChase(strip.Color(255, 0, 0), 50);  // 赤色、50msごとに更新
+  strip.show();
 }
 
 // LED番号26から35までのプログラム
 void prog_26to35() {
   gradientColorWipe(strip.Color(170, 80, 0), strip.Color(173, 216, 170), 50, 2, 4);
+  strip.show();
 }
 // LED番号36から60までのプログラム
 void prog_36to60() {
   theaterChase(strip.Color(0, 0, 255), 50);  // 青色、50msごとに更新
+  strip.show();
 }
 
 // グラデーションで指定した範囲のNeopixelを色で埋める関数
